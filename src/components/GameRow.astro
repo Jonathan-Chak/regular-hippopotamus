@@ -1,0 +1,16 @@
+---
+const { game } = Astro.props;
+---
+
+<tr class="border-b border-neutral-600">
+  <td class="text-xl font-bold">{game.name}</td>
+  <td>
+    <img
+      src={`/.netlify/images?url=/images/${game.logo}`}
+      class="w-32"
+      alt={game.name}
+    />
+  </td>
+  <td>{game.likes} vote{game.likes === 1 ? "" : "s"}</td>
+  <td><a href={`/frameworks/${game.id}`} class="underline">Details&rarr;</a></td>
+</tr>

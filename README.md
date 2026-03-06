@@ -1,2 +1,1 @@
-Deployed to:
-https://regularhippopotamus.netlify.app/
+Game Projects
