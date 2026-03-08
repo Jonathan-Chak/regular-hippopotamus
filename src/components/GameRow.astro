@@ -12,5 +12,5 @@ const { game } = Astro.props;
     />
   </td>
   <td>{game.likes} vote{game.likes === 1 ? "" : "s"}</td>
-  <td><a href={`/frameworks/${game.id}`} class="underline">Details&rarr;</a></td>
+  <td><a href={`/frameworks/${game.path}`} class="underline">Details&rarr;</a></td>
 </tr>

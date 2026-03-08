@@ -7,7 +7,7 @@ import {games} from "../gameList.ts"
 ---
 
 <Layout title="Arcade Menu">
-	<table class="w-full text-left">
+	<table class="w-4xl mx-auto grow text-left">
         <thead>
           <tr class="font-mono-bold text-base border-t border-b  ">
             <th>Name</th>
@@ -18,7 +18,7 @@ import {games} from "../gameList.ts"
         <tbody>
           {games?.map((Game) => (
 			<tr>
-				<td><a href={Game.id.toString()}>{Game.name}</a></td>
+				<td><a href={Game.path.toString()}>{Game.name}</a></td>
 				<td>{Game.description}</td>
 				<td>{Game.likes}</td>
 			</tr>

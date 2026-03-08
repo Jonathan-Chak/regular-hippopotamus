@@ -6,6 +6,7 @@ type game={id:number, name:string, thumbnail:string, description:string, version
 export interface Game {
 	id:number,
 	name:string,
+	path:string,
 	thumbnail:string,
 	description:string,
 	version:number,
