@@ -9,7 +9,8 @@ import Layout from "../components/Layout.astro"
 	</div>
 </div>
 <div id="footer">Made using the <a href="https://love2d.org/" target="_blank">LÖVE Framework</a> (<a href="https://raw.githubusercontent.com/love2d/love/main/license.txt" target="_blank">License</a>) &middot; Packaged using <a href="https://schellingb.github.io/LoveWebBuilder/" target="_blank">LÖVE Web Builder</a></div>
-<script type="text/javascript" is:inline>(function(){
+<script type="module">import '../src/scripts/game.js'</script>
+<script type="text/javascript">;(function(){
 var TXT =
 {
 	PLAYBTN: 'Click here to launch the game',
@@ -50,7 +51,7 @@ var DoLoad = function()
 {
 	Msg(TXT.LOAD);
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'src/scripts/game.js');
+	xhr.open('GET', "src/scripts/game.js");
 	xhr.onprogress = function(e)
 	{
 		if (!e.lengthComputable || ctx.pCnt++ < 5) return;
