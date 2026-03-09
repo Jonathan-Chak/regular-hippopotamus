@@ -10,7 +10,7 @@
     },
     {
         "id":"1",
-        "name":"tetris",
+        "name":"Tetris",
         "path":"wip",
         "thumbnail":"snake.png",
         "description":"under development",
@@ -19,12 +19,11 @@
     },
     {
         "id":"2",
-        "name":"placeholder",
-        "path":"wip",
+        "name":"Timer",
+        "path":"mdcpy",
         "thumbnail":"game2.png",
-        "description":"under development",
+        "description":"Watch you life tick away. You cannot stop it.",
         "version":"0.1",
         "likes":"0"
     }
-
 ]
