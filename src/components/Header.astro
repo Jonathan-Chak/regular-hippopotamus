@@ -1,9 +1,30 @@
-<header class="max-w-4xl mx-auto mt-6 mb-16">
-  <nav class="flex justify-between">
-    <a
-      href="/"
-      class="text-2xl font-bold hover:underline hover:underline-offset-4 hover:decoration-blue-600"
-      ><span class="text-blue-600">&#9816;</span> Home
-    </a>
+---
+import { undefined } from "astro:schema";
+
+const {pathname} = Astro.url;
+
+const navLinks = [
+  { name: '♘Home', href: '/' },
+  { name: 'Wip', href: '/wip' },
+];
+
+const isActive = (href: string) => 
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header class="w-full h-10 mb-16">
+  <nav class="w-full h-15 fixed top-0 bg-gray-900 ">
+    <ul class="flex pt-3">
+      {navLinks.map((link)=>(
+        <li>
+          <a
+          href={link.href}
+          aria-current={isActive(link.href) ? "page" : null}
+          class="text-2xl px-15 font-bold aria-[current=page]:text-blue-500 aria-[current=page]:underline underline-offset-4 decoration-blue-500 decoration-3 ">
+            {link.name}
+          </a> 
+        </li>
+      ))} 
+    </ul>
   </nav>
 </header>

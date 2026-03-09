@@ -1,0 +1,48 @@
+---
+import Layout from "../../components/Layout.astro";
+import {games} from "../../gameList.ts"
+
+
+export function getStaticPaths() {
+  return [
+    { params: { id: "0" }},
+    { params: { id: "1" }},
+    { params: { id: "2" }},
+  ];
+}
+
+const { id } = Astro.params;
+
+export const prerender = false;
+
+let index
+if (!id) {
+  throw new Error("No framework id provided");
+}else{
+  index = Number(id)
+}
+
+
+---
+    <figure>
+      <img
+        src={`../thumbnails/${games[index]?.thumbnail}`}
+        alt={games[index]?.name}
+        class="mb-2 border rounded-sm border-neutral-500"
+      />
+      <figcaption class="font-mono text-xs">{games[index]?.name} logo</figcaption>
+    </figure>
+
+    <p class="py-6 text-xl">{games[index]?.description}</p>
+
+    <form action={`/api/frameworks/${games[index]?.id}/like`} method="post">
+      <h2 class="mb-2 text-2xl">Like {games[index]?.name}!</h2>
+
+      <p class="mb-4">
+        {games[index]?.name} has {games[index]?.likes} vote{
+          games[index]?.likes === 1 ? "" : "s"
+        }.
+      </p>
+
+      <button type="submit" class="px-4 py-2 bg-green-500 rounded-sm text-neutral-800 hover:bg-green-600">Give {games[index]?.name} your vote &starf;</button>
+    </form>

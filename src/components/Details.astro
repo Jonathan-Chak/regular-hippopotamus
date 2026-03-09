@@ -1,0 +1,80 @@
+---
+import {games} from "../gameList.ts"
+let id = 0;
+---
+<script>
+  import {games} from "../gameList.ts"
+    window.addEventListener('ui:update-details',(e) => {
+        const customEvent = e as CustomEvent;
+        let id = customEvent.detail.id;
+        let title= document.getElementById('title');
+        if (title) {  
+         title.textContent = games[id].name;
+        }
+        let fig = document.getElementById('fig');
+        if (fig) {
+          fig.classList.remove('hidden');
+        }
+        let thumbnail= document.getElementById('thumbnail');
+        if (thumbnail) {  
+          thumbnail.src = `../thumbnails/${games[id]?.thumbnail}`;
+        }
+        let figCap = document.getElementById('figCap');
+        if (figCap) {
+          figCap.textContent = games[id]?.name + ' logo'
+        }
+        let description = document.getElementById('description');
+        if (description) {
+          description.textContent = games[id]?.description;
+        }
+        let form = document.getElementById('form');
+        if (form) {
+          form.action = `/api/frameworks/${games[id]?.id}/like`;
+          form.classList.remove('hidden');
+        }
+        let formHead = document.getElementById('formHead');
+        if (formHead) {
+          formHead.textContent = 'Like ' + games[id]?.name+'!';
+        }
+        let likeText = document.getElementById('likeText');
+        if (likeText) {
+          likeText.textContent = games[id]?.name +' has '+ games[id]?.likes + ' vote' + (games[id]?.likes === 1? "." : "s.")
+        }
+        let likeButton = document.getElementById('likeButton');
+        if (likeButton) {
+          likeButton.textContent = 'Give ' + games[id]?.name + ' your vote ★';
+        }
+        let playButton = document.getElementById('playButton');
+        if (playButton) {
+          playButton.classList.remove('hidden');
+          playButton.href = games[id].path;
+        }
+    })
+</script>
+<div class="flex flex-col">
+    <h1 id="title" class="text-4xl font-bold ">Welcome</h1>
+    <figure id="fig" class="hidden">
+      <img
+        src={`../thumbnails/${games[id]?.thumbnail}`}
+        class="mb-2 border rounded-sm border-neutral-500"
+        id="thumbnail"
+      />
+      <figcaption id="figCap" class="font-mono text-xs">{games[id]?.name} logo</figcaption>
+    </figure>
+    
+    <p id="description" class="py-6 text-xl">My collection of small web games</p>
+    
+    <a id="playButton" class=" px-4 py-2 rounded-sm w-45 text-center text-2xl text-neutral-200 font-mono bg-linear-to-br from-green-400 to-green-600 hidden"> &#9654;&#xFE0E;	PLAY</a>
+    
+    <form id="form" class="hidden" action={`/api/frameworks/${games[id]?.id}/like`} method="post">
+      <h2 id="formHead" class="mb-2 text-2xl">Like {games[id]?.name}!</h2>
+
+      <p id="likeText" class="mb-4">
+        {games[id]?.name} has {games[id]?.likes} vote{
+          games[id]?.likes === 1 ? "" : "s"
+        }.
+      </p>
+
+      <button id="likeButton" type="submit" class="px-4 py-2 bg-blue-500 rounded-sm text-neutral-100 hover:bg-blue-600">Give {games[id]?.name} your vote &starf;</button>
+    </form>
+</div>

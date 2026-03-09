@@ -1,16 +1,25 @@
 [
     {
-        "id":"1",
+        "id":"0",
         "name":"Missile Defense",
         "path":"missiledefense",
-        "thumbnail":"missileDefense.png",
+        "thumbnail":"panda.png",
         "description":"Defend yourself and your base against enemy missile attacks!",
         "version":"0.1",
         "likes":"0"
     },
     {
+        "id":"1",
+        "name":"tetris",
+        "path":"wip",
+        "thumbnail":"snake.png",
+        "description":"under development",
+        "version":"0.1",
+        "likes":"0"
+    },
+    {
         "id":"2",
-        "name":"tetris ",
+        "name":"placeholder",
         "path":"wip",
         "thumbnail":"game2.png",
         "description":"under development",

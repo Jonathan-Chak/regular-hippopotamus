@@ -1,0 +1,63 @@
+---
+import Alert from "../components/Alert.astro";
+import GameRow from "../components/GameRow.astro";
+import Layout from "../components/Layout.astro";
+import gameList from "../GameList.json"
+import {games} from "../gameList.ts"
+
+export const prerender = true;
+---
+<div class="px-3">
+  <div class="min-h-screen w-fit border-x-3 border-y-3 border-amber-50">
+    <table class="text-left w-xs" >
+        <thead>
+          <tr class="font-mono-bold text-base border-b-3 ">
+            <th class="px-5 py-3">
+              <input type="text" placeholder="Games" class="placeholder:text-white placeholder:italic focus:placeholder:text-gray-300">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {games?.map((Game) => (
+    		<tr class=" border-b border-neutral-600">
+    			<td class="px-15 py-1"><button class="game" id={Game.id.toString()}>{Game.name}</button></td>
+    		</tr>
+          ))}
+        </tbody>
+    </table>
+  </div>
+</div>
+<script is:inline>
+  const buttons = document.querySelectorAll('.game');
+
+  buttons.forEach(element => {
+    element.addEventListener('click',()=>{
+      const id = element.id;
+      const event = new CustomEvent('ui:update-details',{detail:{id:id}});
+      window.dispatchEvent(event)
+      console.log("selected game "+id);
+      element.classList.add('font-bold');
+      element.closest('tr').classList.add('bg-gray-500');
+    })
+    element.addEventListener('mouseenter',()=>{
+      const id = element.id;
+      element.closest('tr').classList.add('bg-gray-700');
+    })
+    element.addEventListener('mouseleave',()=>{
+      const id = element.id;
+      element.closest('tr').classList.remove('bg-gray-700');
+    })
+  });
+
+  window.addEventListener('ui:update-details',(e) => {
+        const customEvent = e;
+        const buttons = document.querySelectorAll('.game');
+        let id = customEvent.detail.id;
+        buttons.forEach(element=>{
+          if (element.id != id){
+            element.classList.remove('font-bold');
+            element.closest('tr').classList.remove('bg-gray-500');
+          }
+        })
+  })
+</script>

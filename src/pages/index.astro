@@ -2,27 +2,16 @@
 import Alert from "../components/Alert.astro";
 import GameRow from "../components/GameRow.astro";
 import Layout from "../components/Layout.astro";
-import gameList from "../GameList.json"
-import {games} from "../gameList.ts"
+import Sidebar from "../components/Sidebar.astro";
+import Details from "../components/Details.astro";
+
+export const prerender = false;
 ---
 
 <Layout title="Arcade Menu">
-	<table class="w-4xl mx-auto grow text-left">
-        <thead>
-          <tr class="font-mono-bold text-base border-t border-b  ">
-            <th>Name</th>
-            <th>Logo</th>
-            <th>votes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {games?.map((Game) => (
-			<tr>
-				<td><a href={Game.path.toString()}>{Game.name}</a></td>
-				<td>{Game.description}</td>
-				<td>{Game.likes}</td>
-			</tr>
-          ))}
-        </tbody>
-      </table>
+  <div class="flex">
+    <Sidebar/>
+    <Details/>
+  </div>
+  
 </Layout>
