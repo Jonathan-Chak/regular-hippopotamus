@@ -19,8 +19,8 @@ export const prerender = true;
         </thead>
         <tbody>
           {games?.map((Game) => (
-    		<tr class=" border-b border-neutral-600">
-    			<td class="px-15 py-1"><button class="game" id={Game.id.toString()}>{Game.name}</button></td>
+    		<tr class="game border-b border-neutral-600" id={Game.id.toString()}>
+    			<td class="px-15 py-1"><button >{Game.name}</button></td>
     		</tr>
           ))}
         </tbody>

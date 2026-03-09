@@ -20,7 +20,7 @@
     {
         "id":"2",
         "name":"Timer",
-        "path":"mdcpy",
+        "path":"clock",
         "thumbnail":"game2.png",
         "description":"Watch you life tick away. You cannot stop it.",
         "version":"0.1",
