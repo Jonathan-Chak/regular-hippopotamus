@@ -11,9 +11,9 @@
     {
         "id":"1",
         "name":"Tetris",
-        "path":"wip",
-        "thumbnail":"snake.png",
-        "description":"under development",
+        "path":"tetris",
+        "thumbnail":"tetris.png",
+        "description":"Blocks. Blocks come down. Stack blocks make line fill. Blocks too fast. Fail. ",
         "version":"0.1",
         "likes":"0"
     },
@@ -21,7 +21,7 @@
         "id":"2",
         "name":"Timer",
         "path":"clock",
-        "thumbnail":"game2.png",
+        "thumbnail":"snake.png",
         "description":"Watch you life tick away. You cannot stop it.",
         "version":"0.1",
         "likes":"0"

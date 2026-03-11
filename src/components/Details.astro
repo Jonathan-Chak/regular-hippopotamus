@@ -30,7 +30,7 @@ let id = 0;
         let form = document.getElementById('form');
         if (form) {
           form.action = `/api/frameworks/${games[id]?.id}/like`;
-          form.classList.remove('hidden');
+          //form.classList.remove('hidden');
         }
         let formHead = document.getElementById('formHead');
         if (formHead) {
@@ -56,7 +56,7 @@ let id = 0;
     <figure id="fig" class="hidden">
       <img
         src={`../thumbnails/${games[id]?.thumbnail}`}
-        class="mb-2 border rounded-sm border-neutral-500"
+        class="mb-2 w-35 border rounded-sm border-neutral-500"
         id="thumbnail"
       />
       <figcaption id="figCap" class="font-mono text-xs">{games[id]?.name} logo</figcaption>
