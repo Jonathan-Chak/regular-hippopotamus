@@ -1,19 +1,24 @@
 ---
-import Layout from "../components/Layout.astro"
+import Layout from "../components/Layout.astro"	
 ---
 <Layout title="Tetris">
 <div id="wrapper">
 	<div id="main">
 		
-		<center><canvas id="canvas" width="1360" height="765" style="max-width:100%;background:#000;vertical-align:middle"></canvas></center>
+		<center><canvas id="canvas" width="1360" height="765" style="max-width:100%;background:#000;vertical-align:middle"tabindex="0"></canvas></center>
 	</div>
 </div>
-<div class="flex ">
-<div class="text-sm text-green-500">Use "Arrow keys" to move. "Space" = drop. "C" = keep block.</div>
-<p class="text-xs text-right ml-auto " id="footer">Made using the <a href="https://love2d.org/" target="_blank">LÖVE Framework</a> (<a href="https://raw.githubusercontent.com/love2d/love/main/license.txt" target="_blank">License</a>) &middot; Packaged using <a href="https://schellingb.github.io/LoveWebBuilder/" target="_blank">LÖVE Web Builder</a></p>
+<div class="fixed w-full ">
+<div id="instructions" class="text-sm text-green-500">Use "Arrow keys" to move. "Space" = drop. "C" = keep block.</div>
+<p class="text-xs text-right ml-auto" id="footer">Made using the <a href="https://love2d.org/" target="_blank">LÖVE Framework</a> (<a href="https://raw.githubusercontent.com/love2d/love/main/license.txt" target="_blank">License</a>) &middot; Packaged using <a href="https://schellingb.github.io/LoveWebBuilder/" target="_blank">LÖVE Web Builder</a></p>
 </div>
-<!-- <script type="module">import '../src/scripts/game.js'</script>-->
-<script type="text/javascript">;(function(){
+<script type="text/javascript">(function(){
+	const isMobile = window.matchMedia("(max-width: 768px)").matches;
+	let game_path = "../tetrisDT.js"
+  	if (isMobile) {
+  		game_path = "../tetrisMB.js"
+		document.getElementById('instructions').textContent = " Swipe to move, press Hold Box to keep current block"
+  	}
 var TXT =
 {
 	PLAYBTN: 'Click here to launch the game',
@@ -53,8 +58,9 @@ var DoExecute = function()
 var DoLoad = function()
 {
 	Msg(TXT.LOAD);
+
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', "../tetris.js");
+	xhr.open('GET', game_path);
 	xhr.onprogress = function(e)
 	{
 		if (!e.lengthComputable || ctx.pCnt++ < 5) return;
