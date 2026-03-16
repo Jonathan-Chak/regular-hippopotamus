@@ -4,6 +4,7 @@
         "name":"Missile Defense",
         "path":"missiledefense",
         "thumbnail":"panda.png",
+        "banner":"panda.png",
         "description":"Defend yourself and your base against enemy missile attacks!",
         "version":"0.1",
         "likes":"0"
@@ -13,7 +14,8 @@
         "name":"Tetris",
         "path":"tetris",
         "thumbnail":"tetris.png",
-        "description":"Blocks. Blocks come down. Stack blocks make line fill. Blocks too fast. Fail. ",
+        "banner":"tetrisBGcorp.png",
+        "description":"Stack blocks, gain points! ",
         "version":"0.1",
         "likes":"0"
     },
@@ -22,6 +24,7 @@
         "name":"Timer",
         "path":"clock",
         "thumbnail":"snake.png",
+        "banner":"snake.png",
         "description":"Watch you life tick away. You cannot stop it.",
         "version":"0.1",
         "likes":"0"

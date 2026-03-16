@@ -8,18 +8,18 @@ import {games} from "../gameList.ts"
 export const prerender = true;
 ---
 <div class="px-3">
-  <div class="min-h-screen w-fit border-x-3 border-y-3 border-amber-50">
+  <div class="min-h-screen w-fit border-0">
     <table class="text-left w-xs" >
         <thead>
-          <tr class="font-mono-bold text-base border-b-3 ">
-            <th class="px-5 py-3">
+          <tr class="font-mono-bold text-base border-0 ">
+            <th class="px-5 py-3 bg-linear-to-r from-gray-500 to-transparent">
               <input type="text" placeholder="Games" class="placeholder:text-white placeholder:italic focus:placeholder:text-gray-300">
             </th>
           </tr>
         </thead>
         <tbody>
           {games?.map((Game) => (
-    		<tr class="game border-b border-neutral-600" id={Game.id.toString()}>
+    		<tr class="game border-0" id={Game.id.toString()}>
     			<td class="px-15 py-1"><button >{Game.name}</button></td>
     		</tr>
           ))}
@@ -37,7 +37,7 @@ export const prerender = true;
       window.dispatchEvent(event)
       console.log("selected game "+id);
       element.classList.add('font-bold');
-      element.closest('tr').classList.add('bg-gray-500');
+      element.closest('tr').classList.add('bg-blue-800/60');
     })
     element.addEventListener('mouseenter',()=>{
       const id = element.id;
@@ -56,7 +56,7 @@ export const prerender = true;
         buttons.forEach(element=>{
           if (element.id != id){
             element.classList.remove('font-bold');
-            element.closest('tr').classList.remove('bg-gray-500');
+            element.closest('tr').classList.remove('bg-blue-800/60');
           }
         })
   })

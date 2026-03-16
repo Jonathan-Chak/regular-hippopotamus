@@ -1,9 +1,12 @@
 ---
 import {games} from "../gameList.ts"
 let id = 0;
+
+export const prerender = false
 ---
 <script>
-  import {games} from "../gameList.ts"
+import { date } from "astro:schema";
+import {games} from "../gameList.ts"
     window.addEventListener('ui:update-details',(e) => {
         const customEvent = e as CustomEvent;
         let id = customEvent.detail.id;
@@ -13,15 +16,19 @@ let id = 0;
         }
         let fig = document.getElementById('fig');
         if (fig) {
-          fig.classList.remove('hidden');
+          fig.classList.remove("hidden");
+          
+        }
+        let wrapper= document.getElementById('wrapper');
+        let banner_path = games[id].banner
+        banner_path = "bg-[url('banner/"+ games[id].banner+"')]"
+        if (wrapper) { 
+          wrapper.className = "flex flex-col w-full bg-gray-200 bg-blend-multiply";
+          wrapper.style.backgroundImage=`url(/banner/${games[id].banner})`
         }
         let thumbnail= document.getElementById('thumbnail');
-        if (thumbnail) {  
+        if (thumbnail) { 
           thumbnail.src = `../thumbnails/${games[id]?.thumbnail}`;
-        }
-        let figCap = document.getElementById('figCap');
-        if (figCap) {
-          figCap.textContent = games[id]?.name + ' logo'
         }
         let description = document.getElementById('description');
         if (description) {
@@ -44,28 +51,77 @@ let id = 0;
         if (likeButton) {
           likeButton.textContent = 'Give ' + games[id]?.name + ' your vote ★';
         }
+        let gameRecordContainer = document.getElementById('gameRecordContainer');
+        if (gameRecordContainer) {
+          gameRecordContainer.classList.remove('hidden');
+          gameRecordContainer.classList.add('flex');
+        }
         let playButton = document.getElementById('playButton');
         if (playButton) {
           playButton.classList.remove('hidden');
           playButton.href = games[id].path;
+          games.forEach(element => {
+            playButton.classList.remove(element.id.toString())
+          });
+          playButton.classList.add(id)
+        }
+        const GameRecord = JSON.parse(localStorage.getItem(id + ':record')||"{}");
+        let play_count = GameRecord.play_count||0;
+        let last_played = GameRecord.last_played||"never";
+        playButton?.addEventListener('click',(e) =>{
+          if (playButton.classList.contains(id)) {
+            play_count = play_count + 1;
+            last_played = new Date().toLocaleDateString();
+            const GameRecord = {
+              play_count: play_count,
+              last_played: last_played
+            };
+            localStorage.setItem(id + ':record',JSON.stringify(GameRecord));
+          }
+          
+        })
+        let playCount = document.getElementById('playCount');
+        if (playCount) {
+          playCount.textContent = play_count + ' times'
+        }
+        let lastPlayed = document.getElementById('lastPlayed');
+        if (lastPlayed) {
+          lastPlayed.textContent = last_played
         }
     })
 </script>
-<div class="flex flex-col">
+<div id="wrapper" class=" w-full">
+  <div class="flex mt-15 ml-5 px-5 py-2 bg-gray-800/95 w-fit">
+    <img
+      src={`../thumbnails/${games[id]?.thumbnail}`}
+      class="border-0 max-h-10 px-5"
+      id="thumbnail"
+    />
     <h1 id="title" class="text-4xl font-bold ">Welcome</h1>
-    <figure id="fig" class="hidden">
-      <img
-        src={`../thumbnails/${games[id]?.thumbnail}`}
-        class="mb-2 w-35 border rounded-sm border-neutral-500"
-        id="thumbnail"
-      />
-      <figcaption id="figCap" class="font-mono text-xs">{games[id]?.name} logo</figcaption>
-    </figure>
+  </div>
+  
+  
+  <figure id="fig" class="hidden">
     
-    <p id="description" class="py-6 text-xl">My collection of small web games</p>
+  </figure>
+  <div id="gameRecordContainer" class="mt-45 ml-5 px-5 py-2 bg-gray-800/95 w-fit hidden">
+    <a id="playButton" class=" mr-5 mt-2 mb-3 px-4 py-1 w-25 text-center text-md text-neutral-200 font-mono bg-linear-to-b from-blue-400 to-blue-600 hidden"> &#9654;&#xFE0E;	PLAY</a>
+    <table>
+      <tr>
+        <td class="text-blue-600 text-right px-1.5 font-light">PLAYED </td> <td id="playCount">0 times</td>
+      </tr>
+      <tr>
+        <td class="text-blue-600 text-right px-1.5 font-light">LAST PLAYED </td> <td id="lastPlayed"></td>
+      </tr>
+    </table>
     
-    <a id="playButton" class=" px-4 py-2 rounded-sm w-45 text-center text-2xl text-neutral-200 font-mono bg-linear-to-br from-green-400 to-green-600 hidden"> &#9654;&#xFE0E;	PLAY</a>
+  </div>
+  <div class="flex flex-col h-full mt-5 bg-gray-800/95 ">
     
+    
+    
+    <p id="description" class="py-6 mx-5 text-xl">My collection of small web games</p>
+
     <form id="form" class="hidden" action={`/api/frameworks/${games[id]?.id}/like`} method="post">
       <h2 id="formHead" class="mb-2 text-2xl">Like {games[id]?.name}!</h2>
 
@@ -77,4 +133,5 @@ let id = 0;
 
       <button id="likeButton" type="submit" class="px-4 py-2 bg-blue-500 rounded-sm text-neutral-100 hover:bg-blue-600">Give {games[id]?.name} your vote &starf;</button>
     </form>
+  </div>
 </div>

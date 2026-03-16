@@ -1,13 +1,13 @@
-import { number } from "astro:schema"
 import GameListJson from "./GameList.json"
 
-type game={id:number, name:string, thumbnail:string, description:string, version:number, likes:number}
+type game={id:number, name:string, thumbnail:string, banner:string, description:string, version:number, likes:number}
 
 export interface Game {
 	id:number,
 	name:string,
 	path:string,
 	thumbnail:string,
+	banner:string,
 	description:string,
 	version:number,
 	likes:number
