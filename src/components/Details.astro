@@ -91,20 +91,20 @@ import {games} from "../gameList.ts"
     })
 </script>
 <div id="wrapper" class=" w-full">
-  <div class="flex mt-15 ml-5 px-5 py-2 bg-gray-800/95 w-fit">
+  <div class="flex mt-8 md:mt-15 mx-3 md:ml-5 px-5 py-2 bg-gray-800/95 w-fit max-w-full">
     <img
       src={`../thumbnails/${games[id]?.thumbnail}`}
       class="border-0 max-h-10 px-5"
       id="thumbnail"
     />
-    <h1 id="title" class="text-4xl font-bold ">Welcome</h1>
+    <h1 id="title" class="text-2xl md:text-4xl font-bold ">Welcome</h1>
   </div>
   
   
   <figure id="fig" class="hidden">
     
   </figure>
-  <div id="gameRecordContainer" class="mt-45 ml-5 px-5 py-2 bg-gray-800/95 w-fit hidden">
+  <div id="gameRecordContainer" class="mt-8 md:mt-45 mx-3 md:ml-5 px-5 py-2 bg-gray-800/95 w-fit max-w-full hidden">
     <a id="playButton" class=" mr-5 mt-2 mb-3 px-4 py-1 w-25 text-center text-md text-neutral-200 font-mono bg-linear-to-b from-blue-400 to-blue-600 hidden"> &#9654;&#xFE0E;	PLAY</a>
     <table>
       <tr>
